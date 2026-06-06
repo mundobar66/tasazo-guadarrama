@@ -58,6 +58,9 @@
   .sede-box p strong { color: var(--blue); }
   .btn-sede { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--blue); color: white; text-decoration: none; padding: 10px 16px; border-radius: 3px; font-size: 12.5px; font-weight: 600; transition: background 0.2s; }
   .btn-sede:hover { background: var(--blue-light); }
+  .btn-maps { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #e8f0e0; color: #2d5a1b; text-decoration: none; padding: 10px 16px; border-radius: 3px; font-size: 12.5px; font-weight: 600; transition: background 0.2s; border: 1px solid #c5d9a8; }
+  .btn-maps:hover { background: #d6e8c4; }
+  .btn-maps svg { width: 14px; height: 14px; fill: #2d5a1b; flex-shrink: 0; }
   .btn-sede svg { width: 14px; height: 14px; fill: white; flex-shrink: 0; }
 
   /* COMUNIDAD */
@@ -147,10 +150,14 @@
         Descargar documento
       </button>
       <div class="sede-box">
-        <p>Una vez descargues este documento y lo rellenes: <strong>si tienes firma digital</strong>, preséntalo directamente en la sede electrónica del Ayuntamiento. <strong>Si no tienes firma digital</strong>, imprímelo y llévalo al Registro del Ayuntamiento de Guadarrama.</p>
+        <p>Una vez descargues y rellenes el documento, elige cómo presentarlo:</p>
         <a href="https://ayuntamientodeguadarrama.sedelectronica.es/?x=iblILc9IRtzYHK00JNC9OsmzFgpLOJmkZsPc5qyQU-Ii7hCRfBBAu5Lx8pMJ7gMn6p6oMDnMhARHhvrawjg*Dxesd653-SRCQlblZw8XpQs4bgu8s1DSmQ93KmEXhc0pyKj8E3gYOHY" target="_blank" class="btn-sede">
           <svg viewBox="0 0 24 24"><path d="M10 6v2H5v11h11v-5h2v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1h6zm11-3v8h-2V6.413l-7.293 7.294-1.414-1.414L17.585 5H13V3h8z"/></svg>
-          Preséntalo de forma digital aquí
+          Si tienes firma digital, preséntalo aquí
+        </a>
+        <a href="https://maps.app.goo.gl/sEC61hN9YgX6qYJX8" target="_blank" class="btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Si no tienes firma digital, llévalo al Registro
         </a>
       </div>
     </div>
