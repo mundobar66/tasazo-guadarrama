@@ -7,207 +7,288 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-  :root {
-    --green: #1a5c38; --green-light: #2d7a4f;
-    --gold: #c8922a; --gold-light: #e8b84b;
-    --cream: #f5f0e8; --dark: #1a1a1a; --mid: #3d3d3d;
-    --wa: #25D366; --wa-dark: #1ebe5d;
-    --blue: #1a56a0; --blue-light: #2268c0;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--cream); color:var(--dark); font-family:'Source Serif 4',Georgia,serif; min-height:100vh; }
+:root {
+  --green:#1a5c38; --green-light:#2d7a4f;
+  --gold:#c8922a; --gold-light:#e8b84b;
+  --cream:#f5f0e8; --dark:#1a1a1a; --mid:#3d3d3d;
+  --wa:#25D366; --wa-dark:#1ebe5d;
+  --blue:#1a56a0; --blue-light:#2268c0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--cream);color:var(--dark);font-family:'Source Serif 4',Georgia,serif;min-height:100vh;}
+@keyframes aparecer{to{opacity:1;transform:translateY(0);}}
+@keyframes parpadeo{0%,100%{opacity:1;}50%{opacity:0.15;}}
+.fadein{opacity:0;transform:translateY(16px);animation:aparecer 0.7s ease forwards;}
+.parpadeo{animation:parpadeo 1.2s ease-in-out infinite;}
 
-  .hero { background:var(--green); color:white; padding:48px 24px 44px; text-align:center; position:relative; overflow:hidden; }
-  .hero::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,0.03) 40px,rgba(255,255,255,0.03) 80px); }
-  .hero-logo { width:90px; height:90px; border-radius:50%; object-fit:cover; margin-bottom:18px; position:relative; box-shadow:0 4px 20px rgba(0,0,0,0.25); }
-  .hero-badge { display:inline-block; background:var(--gold); color:white; font-size:10px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; padding:5px 16px; border-radius:2px; margin-bottom:18px; position:relative; }
-  .hero h1 { font-family:'Playfair Display',Georgia,serif; font-size:clamp(34px,7vw,64px); font-weight:900; line-height:1.05; letter-spacing:-1px; position:relative; }
-  .hero h1 span { color:var(--gold-light); }
-  .hero-sub { font-size:clamp(14px,2.5vw,17px); font-weight:300; font-style:italic; opacity:0.85; margin-top:12px; position:relative; }
-  .divider { width:60px; height:3px; background:var(--gold); margin:18px auto 0; position:relative; }
+.hero{background:var(--green);color:white;padding:48px 24px 44px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,0.03) 40px,rgba(255,255,255,0.03) 80px);}
+.hero-inner{position:relative;}
+.hero-logo{width:90px;height:90px;border-radius:50%;object-fit:cover;margin-bottom:18px;box-shadow:0 4px 20px rgba(0,0,0,0.25);}
+.hero-badge{display:inline-block;background:var(--gold);color:white;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;padding:5px 16px;border-radius:2px;margin-bottom:18px;}
+.hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(34px,7vw,64px);font-weight:900;line-height:1.05;letter-spacing:-1px;}
+.hero h1 span{color:var(--gold-light);}
+.hero-sub{font-size:clamp(14px,2.5vw,17px);font-weight:300;font-style:italic;opacity:0.85;margin-top:12px;}
+.divider{width:60px;height:3px;background:var(--gold);margin:18px auto 28px;}
+.pleno-box{max-width:680px;margin:0 auto;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:24px 28px;}
+.pleno-text{font-size:15px;line-height:1.75;margin:0 0 20px;color:rgba(255,255,255,0.95);}
+.pleno-text strong{color:#e8b84b;}
+.pleno-pills{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:20px;}
+.pill-rojo{background:rgba(220,50,50,0.25);border:1px solid rgba(220,50,50,0.5);color:#ffaaaa;font-size:13px;font-weight:600;padding:9px 24px;border-radius:20px;display:inline-block;}
+.pill-amarillo{background:rgba(255,200,0,0.15);border:1px solid rgba(255,200,0,0.4);color:#ffe080;font-size:13px;font-weight:600;padding:9px 24px;border-radius:20px;display:inline-block;}
+.pleno-cierre{font-size:14px;font-style:italic;color:rgba(255,255,255,0.7);margin:0;}
 
-  .aviso-importante { max-width:900px; margin:32px auto 0; padding:0 24px; }
-  .aviso-box { background:#fff3cd; border:2px solid #f0a500; border-radius:6px; padding:16px 24px; text-align:center; }
-  .aviso-box p { margin:0; font-size:15px; color:#7a4f00; font-weight:600; }
+.aviso-importante{max-width:900px;margin:32px auto 0;padding:0 24px;}
+.aviso-box{background:#fff3cd;border:2px solid #f0a500;border-radius:6px;padding:16px 24px;text-align:center;}
+.aviso-box p{margin:0;font-size:15px;color:#7a4f00;font-weight:600;}
 
-  .intro { max-width:760px; margin:32px auto 0; padding:0 24px; text-align:center; }
-  .intro p { font-size:16px; line-height:1.8; color:var(--mid); }
-  .intro strong { color:var(--green); font-weight:600; }
+.intro{max-width:760px;margin:32px auto 0;padding:0 24px;text-align:center;}
+.intro p{font-size:16px;line-height:1.8;color:var(--mid);}
+.intro strong{color:var(--green);font-weight:600;}
 
-  .docs-section { max-width:900px; margin:52px auto 0; padding:0 24px; }
-  .section-label { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:28px; text-align:center; }
-  .docs-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
-  .doc-card { background:white; border:1px solid #e0d8cc; border-radius:4px; padding:28px 24px; display:flex; flex-direction:column; gap:14px; position:relative; transition:transform 0.2s,box-shadow 0.2s; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
-  .doc-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(26,92,56,0.12); }
-  .doc-num { font-family:'Playfair Display',Georgia,serif; font-size:44px; font-weight:900; color:var(--green); opacity:0.12; line-height:1; position:absolute; top:16px; right:20px; }
-  .doc-icon { width:42px; height:42px; background:var(--green); border-radius:3px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .doc-icon svg { width:21px; height:21px; fill:white; }
-  .doc-tag { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:600; }
-  .doc-title { font-family:'Playfair Display',Georgia,serif; font-size:17px; font-weight:700; line-height:1.3; color:var(--dark); }
-  .doc-desc { font-size:13px; line-height:1.65; color:#666; flex-grow:1; }
-  .doc-btn { display:inline-flex; align-items:center; gap:8px; background:var(--green); color:white; padding:10px 18px; border-radius:3px; font-size:13px; font-weight:600; transition:background 0.2s; cursor:pointer; border:none; width:100%; justify-content:center; }
-  .doc-btn:hover { background:var(--green-light); }
-  .doc-btn svg { width:14px; height:14px; fill:white; flex-shrink:0; }
-  .sede-box { margin-top:4px; background:#eef4fb; border:1px solid #c5d9f0; border-radius:4px; padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
-  .sede-box p { font-size:12.5px; line-height:1.65; color:#444; }
-  .sede-box p strong { color:var(--blue); }
-  .btn-sede { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:var(--blue); color:white; text-decoration:none; padding:10px 16px; border-radius:3px; font-size:12.5px; font-weight:600; transition:background 0.2s; }
-  .btn-sede:hover { background:var(--blue-light); }
-  .btn-sede svg { width:14px; height:14px; fill:white; flex-shrink:0; }
-  .btn-maps { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:#e8f0e0; color:#2d5a1b; text-decoration:none; padding:10px 16px; border-radius:3px; font-size:12.5px; font-weight:600; transition:background 0.2s; border:1px solid #c5d9a8; }
-  .btn-maps:hover { background:#d6e8c4; }
-  .btn-maps svg { width:14px; height:14px; fill:#2d5a1b; flex-shrink:0; }
+.docs-section{max-width:900px;margin:52px auto 0;padding:0 24px;}
+.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:28px;text-align:center;}
+.docs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;}
+.doc-card{background:white;border:1px solid #e0d8cc;border-radius:4px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;position:relative;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.doc-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(26,92,56,0.12);}
+.doc-num{font-family:'Playfair Display',Georgia,serif;font-size:44px;font-weight:900;color:var(--green);opacity:0.12;line-height:1;position:absolute;top:16px;right:20px;}
+.doc-icon{width:42px;height:42px;background:var(--green);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.doc-icon svg{width:21px;height:21px;fill:white;}
+.doc-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;}
+.doc-title{font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:700;line-height:1.3;color:var(--dark);}
+.doc-desc{font-size:13px;line-height:1.65;color:#666;flex-grow:1;}
+.doc-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:white;padding:10px 18px;border-radius:3px;font-size:13px;font-weight:600;transition:background 0.2s;cursor:pointer;border:none;width:100%;justify-content:center;}
+.doc-btn:hover{background:var(--green-light);}
+.doc-btn svg{width:14px;height:14px;fill:white;flex-shrink:0;}
+.sede-box{margin-top:4px;background:#eef4fb;border:1px solid #c5d9f0;border-radius:4px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;}
+.sede-box p{font-size:12.5px;line-height:1.65;color:#444;}
+.btn-sede{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--blue);color:white;text-decoration:none;padding:10px 16px;border-radius:3px;font-size:12.5px;font-weight:600;}
+.btn-sede:hover{background:var(--blue-light);}
+.btn-sede svg{width:14px;height:14px;fill:white;}
+.btn-maps{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#e8f0e0;color:#2d5a1b;text-decoration:none;padding:10px 16px;border-radius:3px;font-size:12.5px;font-weight:600;border:1px solid #c5d9a8;}
+.btn-maps:hover{background:#d6e8c4;}
+.btn-maps svg{width:14px;height:14px;fill:#2d5a1b;}
 
-  .community-section { max-width:860px; margin:64px auto 0; padding:0 24px; }
-  .community-box { background:white; border:1px solid #e0d8cc; border-radius:6px; padding:44px 36px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center; }
-  .community-box h2 { font-family:'Playfair Display',serif; font-size:clamp(22px,4vw,30px); font-weight:700; color:var(--green); margin-bottom:10px; }
-  .community-box .sub { font-size:15px; color:#777; font-style:italic; margin-bottom:36px; line-height:1.6; }
-  .chats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
-  .chat-card { border:1px solid #e8f5e9; border-radius:5px; padding:28px 24px; text-align:left; background:#f9fef9; }
-  .chat-header { display:flex; align-items:center; gap:14px; margin-bottom:14px; }
-  .chat-wa-icon { width:46px; height:46px; background:var(--wa); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 3px 10px rgba(37,211,102,0.3); }
-  .chat-wa-icon svg { width:26px; height:26px; fill:white; }
-  .chat-name { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:var(--dark); }
-  .chat-type { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--wa-dark); font-weight:600; }
-  .chat-desc { font-size:13px; line-height:1.7; color:#555; margin-bottom:20px; }
-  .btn-wa { display:flex; align-items:center; justify-content:center; gap:9px; background:var(--wa); color:white; text-decoration:none; padding:12px 20px; border-radius:4px; font-size:14px; font-weight:600; transition:background 0.2s,transform 0.15s; box-shadow:0 3px 12px rgba(37,211,102,0.3); }
-  .btn-wa:hover { background:var(--wa-dark); transform:translateY(-2px); }
-  .btn-wa svg { width:18px; height:18px; fill:white; flex-shrink:0; }
+.next-section{max-width:860px;margin:64px auto 0;padding:0 24px;}
+.next-box{background:white;border:1px solid #e0d8cc;border-radius:6px;padding:40px 32px;box-shadow:0 4px 20px rgba(0,0,0,0.06);text-align:center;}
+.next-box h2{font-family:'Playfair Display',serif;font-size:clamp(20px,4vw,28px);font-weight:700;color:var(--green);margin-bottom:8px;}
+.next-sub{font-size:14px;color:#777;font-style:italic;margin-bottom:6px;line-height:1.6;}
+.next-sub2{font-size:13px;color:#999;margin-bottom:28px;line-height:1.6;}
+.counter{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:32px;}
+.cnt-block{text-align:center;}
+.cnt-num{font-size:38px;font-weight:700;color:var(--green);line-height:1;font-family:'Playfair Display',serif;}
+.cnt-lbl{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:1px;}
+.cnt-sep{font-size:28px;color:#ccc;}
+.accordion{display:flex;flex-direction:column;gap:12px;max-width:600px;margin:0 auto;text-align:left;}
+.acc-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-radius:8px;cursor:pointer;border:none;text-align:left;}
+.acc-btn.gold{background:#fff8f0;border:1.5px solid var(--gold);}
+.acc-btn.green{background:#f0f7f3;border:1.5px solid var(--green);}
+.acc-inner{display:flex;align-items:center;gap:12px;}
+.acc-title{font-size:15px;font-weight:700;margin:0 0 2px;}
+.acc-sub{font-size:12px;margin:0;}
+.acc-arrow{font-size:18px;transition:transform 0.3s;flex-shrink:0;}
+.acc-panel{max-height:0;overflow:hidden;transition:max-height 0.4s ease;border-radius:0 0 8px 8px;border-top:none;}
+.acc-panel.gold{background:#fffaf4;border:1.5px solid var(--gold);}
+.acc-panel.green{background:#f9fdf9;border:1.5px solid var(--green);}
+.acc-content{padding:20px 24px;}
+.acc-content p{font-size:14px;line-height:1.7;color:var(--mid);margin-bottom:16px;}
+.btn-wa-sm{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:white;text-decoration:none;padding:11px 22px;border-radius:6px;font-size:14px;font-weight:600;}
+.btn-wa-sm svg{width:18px;height:18px;fill:white;}
 
-  .next-section { max-width:860px; margin:64px auto 0; padding:0 24px; }
-  .next-box { background:white; border:1px solid #e0d8cc; border-radius:6px; padding:40px 32px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center; }
-  .next-box h2 { font-family:'Playfair Display',serif; font-size:clamp(20px,4vw,28px); font-weight:700; color:var(--green); margin-bottom:8px; }
-  .next-box .sub { font-size:14px; color:#777; font-style:italic; margin-bottom:6px; line-height:1.6; }
-  .next-box .sub2 { font-size:13px; color:#999; margin-bottom:28px; line-height:1.6; }
-  .counter { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:32px; }
-  .cnt-block { text-align:center; }
-  .cnt-num { font-size:38px; font-weight:700; color:var(--green); line-height:1; font-family:'Playfair Display',serif; }
-  .cnt-lbl { font-size:10px; color:#aaa; text-transform:uppercase; letter-spacing:1px; }
-  .cnt-sep { font-size:28px; color:#ccc; }
-  .accordion { display:flex; flex-direction:column; gap:12px; max-width:600px; margin:0 auto; text-align:left; }
-  .acc-btn { width:100%; display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-radius:8px; cursor:pointer; border:none; text-align:left; }
-  .acc-btn.gold { background:#fff8f0; border:1.5px solid var(--gold); }
-  .acc-btn.green { background:#f0f7f3; border:1.5px solid var(--green); }
-  .acc-btn-inner { display:flex; align-items:center; gap:12px; }
-  .acc-icon { font-size:22px; }
-  .acc-title { font-size:15px; font-weight:700; margin:0 0 2px; }
-  .acc-sub { font-size:12px; margin:0; }
-  .acc-arrow { font-size:20px; transition:transform 0.3s; flex-shrink:0; }
-  .acc-panel { max-height:0; overflow:hidden; transition:max-height 0.4s ease; border-radius:0 0 8px 8px; border-top:none; }
-  .acc-panel.gold { background:#fffaf4; border:1.5px solid var(--gold); }
-  .acc-panel.green { background:#f9fdf9; border:1.5px solid var(--green); }
-  .acc-content { padding:20px 24px; }
-  .acc-content p { font-size:14px; line-height:1.7; color:var(--mid); margin-bottom:12px; }
-  .acc-content p:last-of-type { margin-bottom:16px; }
-  .btn-wa-sm { display:inline-flex; align-items:center; gap:8px; background:var(--wa); color:white; text-decoration:none; padding:11px 22px; border-radius:6px; font-size:14px; font-weight:600; }
-  .btn-wa-sm svg { width:18px; height:18px; fill:white; }
+.community-section{max-width:860px;margin:64px auto 0;padding:0 24px;}
+.community-box{background:white;border:1px solid #e0d8cc;border-radius:6px;padding:44px 36px;box-shadow:0 4px 20px rgba(0,0,0,0.06);text-align:center;}
+.community-box h2{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,30px);font-weight:700;color:var(--green);margin-bottom:10px;}
+.community-sub{font-size:15px;color:#777;font-style:italic;margin-bottom:36px;line-height:1.6;}
+.chats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;}
+.chat-card{border:1px solid #e8f5e9;border-radius:5px;padding:28px 24px;text-align:left;background:#f9fef9;}
+.chat-header{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.chat-wa-icon{width:46px;height:46px;background:var(--wa);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(37,211,102,0.3);}
+.chat-wa-icon svg{width:26px;height:26px;fill:white;}
+.chat-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--dark);}
+.chat-type{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--wa-dark);font-weight:600;}
+.chat-desc{font-size:13px;line-height:1.7;color:#555;margin-bottom:20px;}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--wa);color:white;text-decoration:none;padding:12px 20px;border-radius:4px;font-size:14px;font-weight:600;transition:background 0.2s,transform 0.15s;box-shadow:0 3px 12px rgba(37,211,102,0.3);}
+.btn-wa:hover{background:var(--wa-dark);transform:translateY(-2px);}
+.btn-wa svg{width:18px;height:18px;fill:white;}
 
-  .qr-section { max-width:600px; margin:56px auto 0; padding:0 24px; text-align:center; }
-  .qr-box { background:white; border:1px solid #e0d8cc; border-radius:4px; padding:36px 28px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
-  .qr-box h2 { font-family:'Playfair Display',Georgia,serif; font-size:22px; font-weight:700; color:var(--green); margin-bottom:6px; }
-  .qr-box p { font-size:13px; color:#999; margin-bottom:24px; font-style:italic; }
-  #qrcode { display:inline-block; padding:10px; background:white; border:2px solid var(--green); border-radius:4px; }
-  .url-display { margin-top:16px; background:var(--cream); border:1px solid #e0d8cc; border-radius:3px; padding:10px 14px; font-family:monospace; font-size:12px; color:var(--mid); word-break:break-all; cursor:pointer; transition:background 0.2s; }
-  .url-display:hover { background:#ede7d9; }
-  .copy-hint { font-size:11px; color:#bbb; margin-top:6px; font-style:italic; }
+.qr-section{max-width:600px;margin:56px auto 0;padding:0 24px;text-align:center;}
+.qr-box{background:white;border:1px solid #e0d8cc;border-radius:4px;padding:36px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.qr-box h2{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:var(--green);margin-bottom:6px;}
+.qr-box p{font-size:13px;color:#999;margin-bottom:24px;font-style:italic;}
+#qrcode{display:inline-block;padding:10px;background:white;border:2px solid var(--green);border-radius:4px;}
+.url-display{margin-top:16px;background:var(--cream);border:1px solid #e0d8cc;border-radius:3px;padding:10px 14px;font-family:monospace;font-size:12px;color:var(--mid);word-break:break-all;cursor:pointer;}
+.copy-hint{font-size:11px;color:#bbb;margin-top:6px;font-style:italic;}
 
-  footer { margin-top:64px; background:var(--green); color:rgba(255,255,255,0.7); text-align:center; padding:28px 24px; font-size:12px; }
-  footer img { width:52px; height:52px; border-radius:50%; margin-bottom:10px; opacity:0.9; }
-  footer strong { color:white; font-size:14px; display:block; margin-bottom:4px; }
-  footer .tagline { font-family:'Playfair Display',serif; font-style:italic; font-size:14px; color:var(--gold-light); margin-bottom:8px; }
-
-  @keyframes parpadeo { 0%,100% { opacity:1; } 50% { opacity:0.15; } }
-  .parpadeo { animation:parpadeo 1.2s ease-in-out infinite; }
-
-  .wa-svg-path { fill:white; }
-
-  @keyframes aparecer { to { opacity:1; transform:translateY(0); } }
-  .fadein { opacity:0; transform:translateY(16px); animation:aparecer 0.7s ease forwards; }
-  .pleno-box { max-width:680px; margin:28px auto 0; background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.15); border-radius:6px; padding:24px 28px; }
-  .pleno-text { font-size:15px; line-height:1.75; margin:0 0 20px; color:rgba(255,255,255,0.95); }
-  .pleno-text strong { color:#e8b84b; }
-  .pleno-pills { display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:20px; }
-  .pill-rojo { background:rgba(220,50,50,0.25); border:1px solid rgba(220,50,50,0.5); color:#ffaaaa; font-size:13px; font-weight:600; padding:9px 24px; border-radius:20px; display:inline-block; }
-  .pill-amarillo { background:rgba(255,200,0,0.15); border:1px solid rgba(255,200,0,0.4); color:#ffe080; font-size:13px; font-weight:600; padding:9px 24px; border-radius:20px; display:inline-block; }
-  .pleno-cierre { font-size:14px; font-style:italic; color:rgba(255,255,255,0.7); margin:0; }
+footer{margin-top:64px;background:var(--green);color:rgba(255,255,255,0.7);text-align:center;padding:28px 24px;font-size:12px;}
+footer img{width:52px;height:52px;border-radius:50%;margin-bottom:10px;opacity:0.9;}
+footer strong{color:white;font-size:14px;display:block;margin-bottom:4px;}
+footer .tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--gold-light);margin-bottom:8px;}
 </style>
 </head>
 <body>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="fadein" style="animation-delay:0.1s;">
-    <img src="data:image/png;base64,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" class="hero-logo" alt="Vecinos por Guadarrama">
-    <div class="hero-badge">Vecinos por Guadarrama</div>
-  </div>
-  <div class="fadein" style="animation-delay:0.4s;">
-    <h1>El <span>Tasazo</span><br>de Residuos</h1>
-    <p class="hero-sub">Información y recursos para los vecinos de Guadarrama</p>
-    <div class="divider"></div>
-  </div>
-  <div class="pleno-box fadein" style="animation-delay:0.8s;">
-    <p class="pleno-text">En el último pleno, Vecinos por Guadarrama presentó <strong>12 enmiendas</strong> a los presupuestos municipales. Una de ellas incluía una batería de bonificaciones para mitigar el impacto de esta tasa sobre las familias.</p>
-    <div class="pleno-pills">
-      <div class="fadein" style="animation-delay:1.4s;"><span class="pill-rojo">PP y VOX votaron en contra</span></div>
-      <div class="fadein" style="animation-delay:2.2s;"><span class="pill-amarillo">PSOE y APPG sorprendentemente se abstuvieron</span></div>
+  <div class="hero-inner">
+    <div class="fadein" style="animation-delay:0.1s;">
+      <img src="data:image/png;base64,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" class="hero-logo" alt="Vecinos por Guadarrama">
+      <div class="hero-badge">Vecinos por Guadarrama</div>
     </div>
-    <div class="fadein" style="animation-delay:3s;">
-      <p class="pleno-cierre">Cuando se trata del bolsillo de los vecinos, no hay excusas para la indiferencia.</p>
+    <div class="fadein" style="animation-delay:0.4s;">
+      <h1>El <span>Tasazo</span><br>de Residuos</h1>
+      <p class="hero-sub">Información y recursos para los vecinos de Guadarrama</p>
+      <div class="divider"></div>
+    </div>
+    <div class="pleno-box fadein" style="animation-delay:0.8s;">
+      <p class="pleno-text">En el último pleno, Vecinos por Guadarrama presentó <strong>12 enmiendas</strong> a los presupuestos municipales. Una de ellas incluía una batería de bonificaciones para mitigar el impacto de esta tasa sobre las familias.</p>
+      <div class="pleno-pills">
+        <div class="fadein" style="animation-delay:1.4s;"><span class="pill-rojo">PP y VOX votaron en contra</span></div>
+        <div class="fadein" style="animation-delay:2.2s;"><span class="pill-amarillo">PSOE y APPG sorprendentemente se abstuvieron</span></div>
+      </div>
+      <div class="fadein" style="animation-delay:3s;">
+        <p class="pleno-cierre">Cuando se trata del bolsillo de los vecinos, no hay excusas para la indiferencia.</p>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- AVISO -->
 <div class="aviso-importante">
   <div class="aviso-box">
     <p class="parpadeo">⚠️ MUY IMPORTANTE: Para poder reclamar es imprescindible abonar la tasa previamente</p>
   </div>
 </div>
 
+<!-- INTRO -->
 <div class="intro">
-  
-            <p>Han pasado 30 días y no has recibido respuesta. Escríbenos y te orientamos sobre qué hacer a continuación.</p>
-            <a href="https://wa.me/34621369753?text=Hola%2C%20han%20pasado%2030%20d%C3%ADas%20desde%20que%20present%C3%A9%20mi%20recurso%20y%20el%20Ayuntamiento%20no%20me%20ha%20contestado.%20Necesito%20ayuda." target="_blank" class="btn-wa-sm">
-              <svg viewBox="0 0 24 24"><path class="wa-svg-path" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              Contáctanos — te ayudamos
-            </a>
+  <p>El Ayuntamiento de Guadarrama ha aprobado una nueva <strong>Tasa por recogida de residuos</strong> que supone una subida muy importante para muchas familias y negocios. Aquí tienes toda la información y el modelo de recurso para que puedas reclamar.</p>
+</div>
+
+<!-- DOCUMENTOS -->
+<div class="docs-section">
+  <div class="section-label">Documentos disponibles</div>
+  <div class="docs-grid">
+    <div class="doc-card">
+      <div class="doc-num">01</div>
+      <div class="doc-icon"><svg viewBox="0 0 24 24"><path d="M14,2H6A2,2,0,0,0,4,4V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V8ZM18,20H6V4h7V9h5ZM9,13H15V15H9Zm0-4H15V11H9Z"/></svg></div>
+      <div class="doc-tag">Divulgación</div>
+      <div class="doc-title">Información para los Vecinos</div>
+      <div class="doc-desc">Explicación clara de qué es el tasazo, por qué subió tanto la tasa y qué opciones tienes para reclamar. Léelo primero.</div>
+      <button class="doc-btn" onclick="downloadDoc('vecinos')"><svg viewBox="0 0 24 24"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16Z"/></svg>Descargar documento</button>
+    </div>
+    <div class="doc-card">
+      <div class="doc-num">02</div>
+      <div class="doc-icon"><svg viewBox="0 0 24 24"><path d="M14,2H6A2,2,0,0,0,4,4V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V8ZM18,20H6V4h7V9h5ZM9,13H15V15H9Zm0-4H15V11H9Z"/></svg></div>
+      <div class="doc-tag">Análisis jurídico</div>
+      <div class="doc-title">Informe Jurídico sobre la Tasa de Residuos</div>
+      <div class="doc-desc">Análisis legal detallado de la ordenanza, sus posibles irregularidades y los fundamentos sólidos para reclamar.</div>
+      <button class="doc-btn" onclick="downloadDoc('informe')"><svg viewBox="0 0 24 24"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16Z"/></svg>Descargar documento</button>
+    </div>
+    <div class="doc-card">
+      <div class="doc-num">03</div>
+      <div class="doc-icon"><svg viewBox="0 0 24 24"><path d="M14,2H6A2,2,0,0,0,4,4V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V8ZM18,20H6V4h7V9h5ZM9,13H15V15H9Zm0-4H15V11H9Z"/></svg></div>
+      <div class="doc-tag">Formulario oficial</div>
+      <div class="doc-title">Modelo de Recurso de Reposición</div>
+      <div class="doc-desc">Escrito oficial listo para rellenar con tus datos y presentar al Ayuntamiento contra la liquidación de la tasa 2026.</div>
+      <button class="doc-btn" onclick="downloadDoc('tasazo')"><svg viewBox="0 0 24 24"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16Z"/></svg>Descargar documento</button>
+      <div class="sede-box">
+        <p>Una vez descargues y rellenes el documento, elige cómo presentarlo:</p>
+        <a href="https://ayuntamientodeguadarrama.sedelectronica.es/?x=iblILc9IRtzYHK00JNC9OsmzFgpLOJmkZsPc5qyQU-Ii7hCRfBBAu5Lx8pMJ7gMn6p6oMDnMhARHhvrawjg*Dxesd653-SRCQlblZw8XpQs4bgu8s1DSmQ93KmEXhc0pyKj8E3gYOHY" target="_blank" class="btn-sede">
+          <svg viewBox="0 0 24 24"><path d="M10 6v2H5v11h11v-5h2v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1h6zm11-3v8h-2V6.413l-7.293 7.294-1.414-1.414L17.585 5H13V3h8z"/></svg>
+          Si tienes firma digital, preséntalo aquí
+        </a>
+        <a href="https://maps.app.goo.gl/sEC61hN9YgX6qYJX8" target="_blank" class="btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Si no tienes firma digital, llévalo al Registro
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUE HAGO DESPUES -->
+<div class="next-section">
+  <div class="next-box">
+    <h2>¿Qué hago después de presentar el recurso?</h2>
+    <p class="next-sub">Esta sección estará disponible en <strong id="dias-texto" style="color:var(--green);">30 días</strong>.</p>
+    <p class="next-sub2">Si el Ayuntamiento te contesta <strong>antes</strong> del plazo y no estás de acuerdo, usa la opción 1 ahora mismo.</p>
+    <div class="counter">
+      <div class="cnt-block"><div class="cnt-num" id="cnt-dias">30</div><div class="cnt-lbl">días</div></div>
+      <div class="cnt-sep">:</div>
+      <div class="cnt-block"><div class="cnt-num" id="cnt-horas">00</div><div class="cnt-lbl">horas</div></div>
+      <div class="cnt-sep">:</div>
+      <div class="cnt-block"><div class="cnt-num" id="cnt-min">00</div><div class="cnt-lbl">min</div></div>
+      <div class="cnt-sep">:</div>
+      <div class="cnt-block"><div class="cnt-num" id="cnt-seg">00</div><div class="cnt-lbl">seg</div></div>
+    </div>
+    <div class="accordion">
+      <div>
+        <button class="acc-btn gold" onclick="toggle(1)">
+          <div class="acc-inner">
+            <span style="font-size:22px;">👎</span>
+            <div>
+              <p class="acc-title" style="color:var(--gold);">Me han contestado pero no estoy de acuerdo</p>
+              <p class="acc-sub" style="color:#a07020;">He recibido respuesta y quiero seguir con el procedimiento</p>
+            </div>
+          </div>
+          <span class="acc-arrow" id="ico1" style="color:var(--gold);">&#8964;</span>
+        </button>
+        <div class="acc-panel gold" id="panel1">
+          <div class="acc-content">
+            <p>Has recibido respuesta y quieres seguir adelante. Escríbenos y te orientamos sobre los próximos pasos.</p>
+            <a href="https://wa.me/34621369753?text=Hola%2C%20he%20recibido%20respuesta%20del%20Ayuntamiento%20y%20quiero%20seguir%20con%20el%20procedimiento.%20Necesito%20ayuda." target="_blank" class="btn-wa-sm"><svg viewBox="0 0 24 24"><path style="fill:white" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Envíanos la respuesta — te asesoramos</a>
           </div>
         </div>
       </div>
-
+      <div>
+        <button class="acc-btn green" onclick="toggle(2)">
+          <div class="acc-inner">
+            <span style="font-size:22px;">📭</span>
+            <div>
+              <p class="acc-title" style="color:var(--green);">El Ayuntamiento no me ha contestado</p>
+              <p class="acc-sub" style="color:var(--green-light);">Han pasado 30 días desde que presenté el recurso</p>
+            </div>
+          </div>
+          <span class="acc-arrow" id="ico2" style="color:var(--green);">&#8964;</span>
+        </button>
+        <div class="acc-panel green" id="panel2">
+          <div class="acc-content">
+            <p>Han pasado 30 días y no has recibido respuesta. Escríbenos y te orientamos sobre qué hacer a continuación.</p>
+            <a href="https://wa.me/34621369753?text=Hola%2C%20han%20pasado%2030%20d%C3%ADas%20y%20el%20Ayuntamiento%20no%20me%20ha%20contestado.%20Necesito%20ayuda." target="_blank" class="btn-wa-sm"><svg viewBox="0 0 24 24"><path style="fill:white" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Contáctanos — te ayudamos</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- COMUNIDAD -->
 <div class="community-section">
   <div class="community-box">
     <h2>Únete a nuestra comunidad</h2>
-    <p class="sub">Tenemos dos canales de WhatsApp según lo que necesites. Puedes unirte a los dos.</p>
+    <p class="community-sub">Tenemos dos canales de WhatsApp según lo que necesites. Puedes unirte a los dos.</p>
     <div class="chats-grid">
       <div class="chat-card">
         <div class="chat-header">
-          <div class="chat-wa-icon"><svg viewBox="0 0 24 24"><path class="wa-svg-path" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+          <div class="chat-wa-icon"><svg viewBox="0 0 24 24"><path style="fill:white" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
           <div><div class="chat-name">El Tasazo</div><div class="chat-type">Canal específico</div></div>
         </div>
         <div class="chat-desc">Canal dedicado exclusivamente a la tasa de residuos. Coordinamos los recursos, resolvemos dudas y compartimos novedades sobre el proceso de reclamación.</div>
-        <a href="https://chat.whatsapp.com/Fz3wdfR8arx048LrY97h7O" target="_blank" class="btn-wa">
-          <svg viewBox="0 0 24 24"><path class="wa-svg-path" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Unirme a El Tasazo
-        </a>
+        <a href="https://chat.whatsapp.com/Fz3wdfR8arx048LrY97h7O" target="_blank" class="btn-wa"><svg viewBox="0 0 24 24"><path style="fill:white" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Unirme a El Tasazo</a>
       </div>
       <div class="chat-card">
         <div class="chat-header">
-          <div class="chat-wa-icon"><svg viewBox="0 0 24 24"><path class="wa-svg-path" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+          <div class="chat-wa-icon"><svg viewBox="0 0 24 24"><path style="fill:white" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
           <div><div class="chat-name">Vecinos por Guadarrama</div><div class="chat-type">Canal general</div></div>
         </div>
         <div class="chat-desc">Canal general de la asociación. Informamos en tiempo real de todo lo que ocurre en el municipio, recogemos quejas, ideas y propuestas de los vecinos.</div>
-        <a href="https://chat.whatsapp.com/IUCFzHQRZZPDkAQLRHTba3" target="_blank" class="btn-wa">
-          <svg viewBox="0 0 24 24"><path class="wa-svg-path" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Unirme a Vecinos por Guadarrama
-        </a>
+        <a href="https://chat.whatsapp.com/IUCFzHQRZZPDkAQLRHTba3" target="_blank" class="btn-wa"><svg viewBox="0 0 24 24"><path style="fill:white" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Unirme a Vecinos por Guadarrama</a>
       </div>
     </div>
   </div>
 </div>
 
+<!-- QR -->
 <div class="qr-section">
   <div class="qr-box">
     <h2>Comparte esta página</h2>
@@ -241,52 +322,35 @@ function downloadDoc(key) {
   const a = document.createElement('a'); a.href = url; a.download = d.filename; a.click();
   URL.revokeObjectURL(url);
 }
-
 function toggle(n) {
-  const panel = document.getElementById('panel' + n);
-  const ico = document.getElementById('ico' + n);
-  const other = n === 1 ? 2 : 1;
-  document.getElementById('panel' + other).style.maxHeight = '0px';
-  document.getElementById('ico' + other).style.transform = 'rotate(0deg)';
-  const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
-  if (isOpen) { panel.style.maxHeight = '0px'; ico.style.transform = 'rotate(0deg)'; }
-  else { panel.style.maxHeight = '600px'; ico.style.transform = 'rotate(180deg)'; }
+  const panel = document.getElementById('panel'+n);
+  const ico = document.getElementById('ico'+n);
+  const other = n===1?2:1;
+  document.getElementById('panel'+other).style.maxHeight='0px';
+  document.getElementById('ico'+other).style.transform='rotate(0deg)';
+  const isOpen = panel.style.maxHeight && panel.style.maxHeight!=='0px';
+  if (isOpen) { panel.style.maxHeight='0px'; ico.style.transform='rotate(0deg)'; }
+  else { panel.style.maxHeight='300px'; ico.style.transform='rotate(180deg)'; }
 }
-
-const fin = new Date(new Date('2026-06-06T00:00:00').getTime() + 30*24*60*60*1000);
+const fin = new Date(new Date('2026-06-06T00:00:00').getTime()+30*24*60*60*1000);
 function actualizar() {
   const diff = fin - new Date();
-  if (diff <= 0) {
-    ['cnt-dias','cnt-horas','cnt-min','cnt-seg'].forEach(id => document.getElementById(id).textContent = '00');
-    document.getElementById('dias-texto').textContent = '0 días';
-    return;
-  }
-  const d = Math.floor(diff/(1000*60*60*24));
-  const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  const m = Math.floor((diff%(1000*60*60))/(1000*60));
-  const s = Math.floor((diff%(1000*60))/1000);
-  document.getElementById('cnt-dias').textContent = String(d).padStart(2,'0');
-  document.getElementById('cnt-horas').textContent = String(h).padStart(2,'0');
-  document.getElementById('cnt-min').textContent = String(m).padStart(2,'0');
-  document.getElementById('cnt-seg').textContent = String(s).padStart(2,'0');
-  document.getElementById('dias-texto').textContent = d + (d===1?' día':' días');
+  if (diff<=0) { ['cnt-dias','cnt-horas','cnt-min','cnt-seg'].forEach(id=>document.getElementById(id).textContent='00'); return; }
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+  document.getElementById('cnt-dias').textContent=String(d).padStart(2,'0');
+  document.getElementById('cnt-horas').textContent=String(h).padStart(2,'0');
+  document.getElementById('cnt-min').textContent=String(m).padStart(2,'0');
+  document.getElementById('cnt-seg').textContent=String(s).padStart(2,'0');
+  document.getElementById('dias-texto').textContent=d+(d===1?' día':' días');
 }
-actualizar();
-setInterval(actualizar, 1000);
-
-const pageUrl = window.location.href;
-document.getElementById('urlDisplay').textContent = pageUrl;
-new QRCode(document.getElementById('qrcode'), {
-  text: pageUrl, width: 180, height: 180,
-  colorDark: '#1a5c38', colorLight: '#ffffff',
-  correctLevel: QRCode.CorrectLevel.M
-});
-function copyUrl() {
-  navigator.clipboard.writeText(pageUrl).then(() => {
-    document.getElementById('copyHint').textContent = '✓ Enlace copiado';
-    setTimeout(() => document.getElementById('copyHint').textContent = 'Haz clic para copiar el enlace', 2000);
-  });
-}
+actualizar(); setInterval(actualizar,1000);
+const pageUrl=window.location.href;
+document.getElementById('urlDisplay').textContent=pageUrl;
+new QRCode(document.getElementById('qrcode'),{text:pageUrl,width:180,height:180,colorDark:'#1a5c38',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+function copyUrl(){navigator.clipboard.writeText(pageUrl).then(()=>{document.getElementById('copyHint').textContent='✓ Enlace copiado';setTimeout(()=>document.getElementById('copyHint').textContent='Haz clic para copiar el enlace',2000);});}
 </script>
 </body>
 </html>
