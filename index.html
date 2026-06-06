@@ -17,11 +17,12 @@
     --mid: #3d3d3d;
     --wa: #25D366;
     --wa-dark: #1ebe5d;
+    --blue: #1a56a0;
+    --blue-light: #2268c0;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--cream); color: var(--dark); font-family: 'Source Serif 4', Georgia, serif; min-height: 100vh; }
 
-  /* HERO */
   .hero { background: var(--green); color: white; padding: 48px 24px 44px; text-align: center; position: relative; overflow: hidden; }
   .hero::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 80px); }
   .hero-logo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin-bottom: 18px; position: relative; box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
@@ -31,15 +32,14 @@
   .hero-sub { font-size: clamp(14px, 2.5vw, 17px); font-weight: 300; font-style: italic; opacity: 0.85; margin-top: 12px; position: relative; }
   .divider { width: 60px; height: 3px; background: var(--gold); margin: 18px auto 0; position: relative; }
 
-  /* INTRO */
   .intro { max-width: 760px; margin: 44px auto 0; padding: 0 24px; text-align: center; }
   .intro p { font-size: 16px; line-height: 1.8; color: var(--mid); }
   .intro strong { color: var(--green); font-weight: 600; }
 
-  /* DOCS */
   .docs-section { max-width: 900px; margin: 52px auto 0; padding: 0 24px; }
   .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 28px; text-align: center; }
   .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+
   .doc-card { background: white; border: 1px solid #e0d8cc; border-radius: 4px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px; position: relative; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
   .doc-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,92,56,0.12); }
   .doc-num { font-family: 'Playfair Display', Georgia, serif; font-size: 44px; font-weight: 900; color: var(--green); opacity: 0.12; line-height: 1; position: absolute; top: 16px; right: 20px; }
@@ -51,6 +51,14 @@
   .doc-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: white; padding: 10px 18px; border-radius: 3px; font-size: 13px; font-weight: 600; transition: background 0.2s; cursor: pointer; border: none; width: 100%; justify-content: center; }
   .doc-btn:hover { background: var(--green-light); }
   .doc-btn svg { width: 14px; height: 14px; fill: white; flex-shrink: 0; }
+
+  /* Bloque presentación digital */
+  .sede-box { margin-top: 4px; background: #eef4fb; border: 1px solid #c5d9f0; border-radius: 4px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .sede-box p { font-size: 12.5px; line-height: 1.65; color: #444; }
+  .sede-box p strong { color: var(--blue); }
+  .btn-sede { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--blue); color: white; text-decoration: none; padding: 10px 16px; border-radius: 3px; font-size: 12.5px; font-weight: 600; transition: background 0.2s; }
+  .btn-sede:hover { background: var(--blue-light); }
+  .btn-sede svg { width: 14px; height: 14px; fill: white; flex-shrink: 0; }
 
   /* COMUNIDAD */
   .community-section { max-width: 860px; margin: 64px auto 0; padding: 0 24px; }
@@ -69,7 +77,6 @@
   .btn-wa:hover { background: var(--wa-dark); transform: translateY(-2px); }
   .btn-wa svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
 
-  /* QR */
   .qr-section { max-width: 600px; margin: 56px auto 0; padding: 0 24px; text-align: center; }
   .qr-box { background: white; border: 1px solid #e0d8cc; border-radius: 4px; padding: 36px 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
   .qr-box h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; color: var(--green); margin-bottom: 6px; }
@@ -79,11 +86,12 @@
   .url-display:hover { background: #ede7d9; }
   .copy-hint { font-size: 11px; color: #bbb; margin-top: 6px; font-style: italic; }
 
-  /* FOOTER */
   footer { margin-top: 64px; background: var(--green); color: rgba(255,255,255,0.7); text-align: center; padding: 28px 24px; font-size: 12px; }
   footer img { width: 52px; height: 52px; border-radius: 50%; margin-bottom: 10px; opacity: 0.9; }
   footer strong { color: white; font-size: 14px; display: block; margin-bottom: 4px; }
   footer .tagline { font-family: 'Playfair Display', serif; font-style: italic; font-size: 14px; color: var(--gold-light); margin-bottom: 8px; }
+
+  .wa-svg { display: inline-block; }
 </style>
 </head>
 <body>
@@ -138,40 +146,38 @@
         <svg viewBox="0 0 24 24"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16Z"/></svg>
         Descargar documento
       </button>
+      <div class="sede-box">
+        <p>Una vez descargues este documento y lo rellenes: <strong>si tienes firma digital</strong>, preséntalo directamente en la sede electrónica del Ayuntamiento. <strong>Si no tienes firma digital</strong>, imprímelo y llévalo al Registro del Ayuntamiento de Guadarrama.</p>
+        <a href="https://ayuntamientodeguadarrama.sedelectronica.es/?x=iblILc9IRtzYHK00JNC9OsmzFgpLOJmkZsPc5qyQU-Ii7hCRfBBAu5Lx8pMJ7gMn6p6oMDnMhARHhvrawjg*Dxesd653-SRCQlblZw8XpQs4bgu8s1DSmQ93KmEXhc0pyKj8E3gYOHY" target="_blank" class="btn-sede">
+          <svg viewBox="0 0 24 24"><path d="M10 6v2H5v11h11v-5h2v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1h6zm11-3v8h-2V6.413l-7.293 7.294-1.414-1.414L17.585 5H13V3h8z"/></svg>
+          Preséntalo de forma digital aquí
+        </a>
+      </div>
     </div>
 
   </div>
 </div>
 
-<!-- COMUNIDAD -->
 <div class="community-section">
   <div class="community-box">
     <h2>Únete a nuestra comunidad</h2>
     <p class="sub">Tenemos dos canales de WhatsApp según lo que necesites.<br>Puedes unirte a los dos.</p>
     <div class="chats-grid">
-
       <div class="chat-card">
         <div class="chat-header">
           <div class="chat-wa-icon"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
-          <div>
-            <div class="chat-name">El Tasazo</div>
-            <div class="chat-type">Canal específico</div>
-          </div>
+          <div><div class="chat-name">El Tasazo</div><div class="chat-type">Canal específico</div></div>
         </div>
-        <div class="chat-desc">Canal dedicado exclusivamente a la tasa de residuos. Aquí coordinamos los recursos, resolvemos dudas y compartimos novedades sobre el proceso de reclamación.</div>
+        <div class="chat-desc">Canal dedicado exclusivamente a la tasa de residuos. Coordinamos los recursos, resolvemos dudas y compartimos novedades sobre el proceso de reclamación.</div>
         <a href="https://chat.whatsapp.com/Fz3wdfR8arx048LrY97h7O" target="_blank" class="btn-wa">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Unirme a El Tasazo
         </a>
       </div>
-
       <div class="chat-card">
         <div class="chat-header">
           <div class="chat-wa-icon"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
-          <div>
-            <div class="chat-name">Vecinos por Guadarrama</div>
-            <div class="chat-type">Canal general</div>
-          </div>
+          <div><div class="chat-name">Vecinos por Guadarrama</div><div class="chat-type">Canal general</div></div>
         </div>
         <div class="chat-desc">Canal general de la asociación. Informamos en tiempo real de todo lo que ocurre en el municipio, recogemos quejas, ideas y propuestas de los vecinos.</div>
         <a href="https://chat.whatsapp.com/IUCFzHQRZZPDkAQLRHTba3" target="_blank" class="btn-wa">
@@ -179,12 +185,10 @@
           Unirme a Vecinos por Guadarrama
         </a>
       </div>
-
     </div>
   </div>
 </div>
 
-<!-- QR -->
 <div class="qr-section">
   <div class="qr-box">
     <h2>Comparte esta página</h2>
