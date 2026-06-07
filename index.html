@@ -236,22 +236,12 @@ footer .tagline{font-family:'Playfair Display',serif;font-style:italic;font-size
           <span class="acc-arrow" id="ico1" style="color:var(--gold);">&#8964;</span>
         </button>
         <div class="acc-panel gold" id="panel1">
-          <div class="acc-content">
-            <form id="form1" action="https://formspree.io/f/mvznkyaw" method="POST" enctype="multipart/form-data">
-              <div class="form">
-                <div><label>Tu nombre</label><input type="text" name="nombre" placeholder="Nombre y apellidos" required></div>
-                <div><label>Tu teléfono</label><input type="tel" name="telefono" placeholder="600 000 000" required></div>
-                <div><label>Cuéntanos brevemente tu caso</label><textarea name="caso" placeholder="Explica qué te ha contestado el Ayuntamiento y por qué no estás de acuerdo..." required></textarea></div>
-                <div>
-                  <label>Adjunta la respuesta del Ayuntamiento <span class="label-opt">(PDF, foto, Word...)</span></label>
-                  <input type="file" name="adjunto" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="padding:8px;">
-                </div>
-                <input type="hidden" name="_subject" value="Nueva consulta: Me han contestado — Tasazo Guadarrama">
-                <button type="submit" class="btn-enviar-gold">Enviar mi consulta</button>
-                <div class="success-msg" id="ok1">✅ Consulta enviada. Te responderemos lo antes posible.</div>
-                <p class="aviso-form">Tus datos se usarán únicamente para gestionar tu consulta</p>
-              </div>
-            </form>
+          <div class="acc-content" style="text-align:center;">
+            <p style="font-size:14px;color:#555;margin-bottom:20px;line-height:1.7;">Has recibido respuesta y quieres seguir adelante. Rellena el formulario y te orientamos sobre los próximos pasos. Los archivos adjuntos se guardan automáticamente.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfo0Bs7Fy9e_lBCHZ602Srgr-k6-hMtHEGutV_YOsd84GiG3A/viewform" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:white;text-decoration:none;padding:13px 28px;border-radius:5px;font-size:15px;font-weight:600;">
+              📋 Abrir formulario
+            </a>
+            <p style="font-size:11px;color:#bbb;margin-top:10px;font-style:italic;">Se abrirá en una nueva ventana</p>
           </div>
         </div>
       </div>
@@ -285,22 +275,12 @@ footer .tagline{font-family:'Playfair Display',serif;font-style:italic;font-size
               </div>
               <p style="font-size:12px;color:#aaa;text-align:center;font-style:italic;">Si no recibes respuesta cuando llegue a cero, vuelve aquí.</p>
             </div>
-            <div id="form2-wrapper" style="display:none;">
-              <form id="form2" action="https://formspree.io/f/xjgdyzwd" method="POST" enctype="multipart/form-data">
-                <div class="form">
-                  <div><label>Tu nombre</label><input type="text" name="nombre" placeholder="Nombre y apellidos" required></div>
-                  <div><label>Tu teléfono</label><input type="tel" name="telefono" placeholder="600 000 000" required></div>
-                  <div><label>Cuéntanos tu situación</label><textarea name="caso" placeholder="¿Cuándo presentaste el recurso? ¿Cuál es el importe de la tasa?..." required></textarea></div>
-                  <div>
-                    <label>Adjunta el justificante de presentación <span class="label-opt">(si lo tienes)</span></label>
-                    <input type="file" name="adjunto" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="padding:8px;">
-                  </div>
-                  <input type="hidden" name="_subject" value="Nueva consulta: Sin respuesta — Tasazo Guadarrama">
-                  <button type="submit" class="btn-enviar-green">Enviar mi consulta</button>
-                  <div class="success-msg" id="ok2">✅ Consulta enviada. Te responderemos lo antes posible.</div>
-                  <p class="aviso-form">Tus datos se usarán únicamente para gestionar tu consulta</p>
-                </div>
-              </form>
+            <div id="form2-wrapper" style="display:none;text-align:center;">
+              <p style="font-size:14px;color:#555;margin-bottom:20px;line-height:1.7;">Han pasado 30 días y no has recibido respuesta. Rellena el formulario y te orientamos sobre qué hacer a continuación.</p>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLScBIvYVF-um6bcNqehIM-asI44Bh00ZNqWGZk8RmqvYcIFmHQ/viewform" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--green);color:white;text-decoration:none;padding:13px 28px;border-radius:5px;font-size:15px;font-weight:600;">
+                📋 Abrir formulario
+              </a>
+              <p style="font-size:11px;color:#bbb;margin-top:10px;font-style:italic;">Se abrirá en una nueva ventana</p>
             </div>
           </div>
         </div>
