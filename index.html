@@ -161,14 +161,7 @@ footer .tagline{font-family:'Playfair Display',serif;font-style:italic;font-size
       <div class="fadein" style="animation-delay:3s;">
         <p class="pleno-cierre">Cuando se trata del bolsillo de los vecinos, no hay excusas para la indiferencia.</p>
       </div>
-    <div class="doc-card">
-      <div class="doc-num">04</div>
-      <div class="doc-icon"><svg viewBox="0 0 24 24"><path d="M14,2H6A2,2,0,0,0,4,4V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V8ZM18,20H6V4h7V9h5ZM9,13H15V15H9Zm0-4H15V11H9Z"/></svg></div>
-      <div class="doc-tag">Guía práctica</div>
-      <div class="doc-title">Guía para Rellenar y Presentar el Recurso</div>
-      <div class="doc-desc">Instrucciones paso a paso para rellenar el modelo correctamente, presentarlo en el Ayuntamiento y quedarte con el justificante. Muy recomendable.</div>
-      <button class="doc-btn" onclick="downloadDoc('guia')"><svg viewBox="0 0 24 24"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16Z"/></svg>Descargar guía</button>
-    </div>
+
   </div>
 </div>
 
@@ -225,6 +218,17 @@ footer .tagline{font-family:'Playfair Display',serif;font-style:italic;font-size
       <div class="doc-title">Modelo de Recurso de Reposición</div>
       <div class="doc-desc">Escrito oficial listo para rellenar con tus datos y presentar al Ayuntamiento contra la liquidación de la tasa 2026.</div>
       <button class="doc-btn" onclick="downloadDoc('tasazo')"><svg viewBox="0 0 24 24"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16Z"/></svg>Descargar documento</button>
+      <button onclick="toggleGuia()" style="display:inline-flex;align-items:center;gap:8px;background:#f0f7f3;color:var(--green);border:1.5px solid var(--green);padding:9px 16px;border-radius:3px;font-size:12.5px;font-weight:600;cursor:pointer;width:100%;justify-content:center;margin-top:-4px;">
+        <span id="guia-ico">▶</span> ¿Cómo lo relleno y presento? Ver guía paso a paso
+      </button>
+      <div id="guia-panel" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;">
+        <div style="background:#f9fdf9;border:1px solid #c5d9a8;border-radius:4px;padding:16px 18px;margin-top:4px;">
+          <p style="font-size:13px;color:#444;line-height:1.7;margin-bottom:12px;">La guía incluye instrucciones detalladas para rellenar cada campo, cómo presentarlo en el Ayuntamiento y qué justificante pedir.</p>
+          <button class="doc-btn" onclick="downloadDoc('guia')" style="background:#2d7a4f;">
+            <svg viewBox="0 0 24 24"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16Z"/></svg>Descargar guía paso a paso
+          </button>
+        </div>
+      </div>
       <div class="sede-box">
         <p>Una vez descargues y rellenes el documento, elige cómo presentarlo:</p>
         <a href="https://ayuntamientodeguadarrama.sedelectronica.es/?x=iblILc9IRtzYHK00JNC9OsmzFgpLOJmkZsPc5qyQU-Ii7hCRfBBAu5Lx8pMJ7gMn6p6oMDnMhARHhvrawjg*Dxesd653-SRCQlblZw8XpQs4bgu8s1DSmQ93KmEXhc0pyKj8E3gYOHY" target="_blank" class="btn-sede">
@@ -451,6 +455,13 @@ actualizar();
 setInterval(actualizar,1000);
 
 // QR
+function toggleGuia() {
+  const panel = document.getElementById('guia-panel');
+  const ico = document.getElementById('guia-ico');
+  const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+  panel.style.maxHeight = isOpen ? '0px' : '300px';
+  ico.textContent = isOpen ? '▶' : '▼';
+}
 function copyUrl(){
   const url='https://mundobar66.github.io/tasazo-guadarrama/';
   navigator.clipboard.writeText(url).then(()=>{
