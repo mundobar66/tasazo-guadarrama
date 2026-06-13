@@ -379,21 +379,7 @@ function downloadDoc(key){
   URL.revokeObjectURL(url);
 }
 
-// Formularios con AJAX
-document.getElementById('form1').addEventListener('submit',async function(e){
-  e.preventDefault();
-  const fd=new FormData(this);
-  await fetch(this.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}});
-  document.getElementById('ok1').style.display='block';
-  this.reset();
-});
-document.getElementById('form2').addEventListener('submit',async function(e){
-  e.preventDefault();
-  const fd=new FormData(this);
-  await fetch(this.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}});
-  document.getElementById('ok2').style.display='block';
-  this.reset();
-});
+// Formularios gestionados via Google Forms
 
 // Contador y bloqueo
 const fin=new Date(new Date('2026-06-06T00:00:00').getTime()+30*24*60*60*1000);
