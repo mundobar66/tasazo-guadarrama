@@ -204,66 +204,10 @@ footer .tagline{font-family:'Playfair Display',serif;font-style:italic;font-size
   </div>
 </div>
 
-<div class="next-section">
-  <div class="next-box">
-    <h2>¿Qué hago con la respuesta del Ayuntamiento?</h2>
-    <p class="next-sub">Selecciona tu situación y te orientamos sobre los próximos pasos.</p>
-    <div class="accordion">
-      <div>
-        <button class="acc-btn gold" onclick="toggle(1)">
-          <div class="acc-inner">
-            <span style="font-size:22px;">👎</span>
-            <div>
-              <p class="acc-title" style="color:var(--gold);">Me han contestado pero no estoy de acuerdo</p>
-              <p class="acc-sub" style="color:#a07020;">Quiero seguir con el procedimiento</p>
-            </div>
-          </div>
-          <span class="acc-arrow" id="ico1" style="color:var(--gold);">&#8964;</span>
-        </button>
-        <div class="acc-panel gold" id="panel1">
-          <div class="acc-content">
-            <p>Has recibido respuesta y quieres seguir adelante. Rellena el formulario y te orientamos sobre los próximos pasos.</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfo0Bs7Fy9e_lBCHZ602Srgr-k6-hMtHEGutV_YOsd84GiG3A/viewform" target="_blank" class="btn-form gold">📋 Abrir formulario</a>
-            <p style="font-size:11px;color:#bbb;margin-top:10px;font-style:italic;">Se abrirá en una nueva ventana</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <button class="acc-btn locked" id="btn2" onclick="toggle(2)">
-          <div class="acc-inner">
-            <span style="font-size:22px;" id="ico-emoji">🔒</span>
-            <div>
-              <p class="acc-title" id="title2" style="color:#aaa;">El Ayuntamiento no me ha contestado</p>
-              <p class="acc-sub" id="sub2" style="color:#bbb;">Disponible en <span id="dias-pill">30 días</span></p>
-            </div>
-          </div>
-          <span class="acc-arrow" id="ico2" style="color:#ccc;">&#8964;</span>
-        </button>
-        <div class="acc-panel locked-panel" id="panel2">
-          <div class="acc-content">
-            <div id="locked-content">
-              <p style="font-size:13px;color:#888;margin-bottom:12px;">Esta opción estará disponible en:</p>
-              <div class="counter-inline">
-                <div class="cnt-block"><div class="cnt-num" id="cnt-dias">30</div><div class="cnt-lbl">días</div></div>
-                <div class="cnt-sep">:</div>
-                <div class="cnt-block"><div class="cnt-num" id="cnt-horas">00</div><div class="cnt-lbl">horas</div></div>
-                <div class="cnt-sep">:</div>
-                <div class="cnt-block"><div class="cnt-num" id="cnt-min">00</div><div class="cnt-lbl">min</div></div>
-                <div class="cnt-sep">:</div>
-                <div class="cnt-block"><div class="cnt-num" id="cnt-seg">00</div><div class="cnt-lbl">seg</div></div>
-              </div>
-              <p style="font-size:12px;color:#aaa;font-style:italic;">Si no recibes respuesta cuando llegue a cero, vuelve aquí.</p>
-            </div>
-            <div id="form2-wrapper" style="display:none;">
-              <p>Han pasado 30 días y no has recibido respuesta. Rellena el formulario y te orientamos.</p>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLScBIvYVF-um6bcNqehIM-asI44Bh00ZNqWGZk8RmqvYcIFmHQ/viewform" target="_blank" class="btn-form green">📋 Abrir formulario</a>
-              <p style="font-size:11px;color:#bbb;margin-top:10px;font-style:italic;">Se abrirá en una nueva ventana</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div style="max-width:760px;margin:48px auto 0;padding:0 24px;text-align:center;">
+  <a href="seguimiento.html" style="display:inline-flex;align-items:center;gap:8px;background:white;border:1.5px solid var(--green);color:var(--green);text-decoration:none;padding:14px 28px;border-radius:5px;font-size:14px;font-weight:600;">
+    📋 ¿Ya presentaste el recurso? Haz seguimiento aquí
+  </a>
 </div>
 
 <div class="community-section">
