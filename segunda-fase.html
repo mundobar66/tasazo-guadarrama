@@ -1,36 +1,86 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#1a5c38">
-<title>Tasazo Guadarrama | Recursos sin respuesta</title>
-<meta name="description" content="Segunda fase de seguimiento de los recursos sobre la tasa de residuos en Guadarrama.">
+<meta name="theme-color" content="#1a5c38">
+<title>Tasazo Guadarrama | Genera tu solicitud de resolución expresa</title>
+<meta name="description" content="Genera gratuitamente un escrito individual para solicitar respuesta expresa a tu recurso de reposición sobre la tasa de residuos de Guadarrama.">
 <style>
 :root{--verde:#1a5c38;--oro:#c8922a;--crema:#f5f0e8;--texto:#202420}
 *{box-sizing:border-box}body{margin:0;background:var(--crema);color:var(--texto);font:17px/1.55 Georgia,serif}
-header{background:var(--verde);color:white;text-align:center;padding:44px 18px 48px}
-header small{display:inline-block;background:var(--oro);padding:5px 13px;letter-spacing:2px;font:700 11px Arial,sans-serif}
-h1{font-size:clamp(29px,6vw,48px);line-height:1.1;margin:19px auto 12px;max-width:720px}
-header p{max-width:620px;margin:0 auto;font-size:19px}
-main{max-width:690px;margin:-18px auto 50px;padding:0 16px}
+header{background:var(--verde);color:white;text-align:center;padding:42px 18px 48px}
+header small{display:inline-block;background:var(--oro);padding:5px 13px;letter-spacing:1.5px;font:700 11px Arial,sans-serif}
+h1{font-size:clamp(28px,5.5vw,46px);line-height:1.12;margin:19px auto 12px;max-width:760px}header p{max-width:650px;margin:auto;font-size:18px}
+main{max-width:750px;margin:-18px auto 50px;padding:0 16px}
 section{background:white;border-radius:12px;padding:clamp(22px,5vw,38px);box-shadow:0 8px 30px #00000010;margin-bottom:18px}
-h2{color:var(--verde);font-size:26px;line-height:1.2;margin:0 0 12px}
-p{margin:0 0 18px}.note{border-left:4px solid var(--oro);padding:12px 16px;background:#fff9ec;font-size:15px}
+h2{color:var(--verde);font-size:25px;line-height:1.25;margin:0 0 12px}p{margin:0 0 16px}
+.note{border-left:4px solid var(--oro);padding:12px 16px;background:#fff9ec;font-size:15px;margin:15px 0}
 label{display:block;font:700 14px Arial,sans-serif;margin:18px 0 7px}
-input{width:100%;padding:13px;border:1px solid #c6c6c6;border-radius:7px;font-size:16px;background:#f5f5f5}
-input:disabled{color:#777}
-button{width:100%;padding:17px;border:0;border-radius:7px;background:#8b948c;color:white;font:bold 16px Arial,sans-serif;margin-top:22px}
-small{font-size:13px}.muted{color:#555}footer{text-align:center;padding:20px;font-size:13px;color:#555}
-</style></head>
-<body><header><small>VECINOS POR GUADARRAMA · TASAZO</small><h1>¿Presentaste un recurso y sigues sin respuesta?</h1><p>Estamos preparando una actuación conjunta para solicitar respuesta a los recursos pendientes.</p></header>
-<main><section><h2>Segunda fase: recursos sin respuesta</h2><p>Queremos reunir de forma ordenada la información de los recursos presentados contra la tasa de residuos de Guadarrama y comprobar qué expedientes continúan sin resolución.</p>
-<p>La documentación servirá para estudiar un escrito conjunto solicitando resolución expresa, antes de valorar otras vías.</p>
-<div class="note"><strong>Formulario en preparación.</strong> Todavía no estamos recogiendo documentación. Avisaremos por el grupo de WhatsApp cuando esté habilitado el envío seguro.</div></section>
-<section><h2>Registro del recurso</h2><p class="muted">Estos son los datos que se solicitarán cuando esté disponible el formulario seguro.</p>
-<form><label for="nombre">Nombre y apellidos</label><input id="nombre" disabled placeholder="Nombre completo">
-<label for="fecha">Fecha de presentación del recurso</label><input id="fecha" type="date" disabled>
-<label for="registro">Número de registro</label><input id="registro" disabled placeholder="Número del justificante">
-<label for="correo">Correo electrónico de contacto</label><input id="correo" type="email" disabled placeholder="correo@ejemplo.com">
-<label for="recurso">Copia del recurso presentado</label><input id="recurso" type="file" disabled accept=".pdf,image/*">
-<label for="justificante">Justificante de presentación</label><input id="justificante" type="file" disabled accept=".pdf,image/*">
-<button type="button" disabled>Envío pendiente de activación</button></form>
-<p style="margin-top:20px"><small>Antes de activar el formulario publicaremos la información sobre el responsable del tratamiento, finalidad, base jurídica, conservación y ejercicio de derechos. La aportación de documentos no otorga por sí sola representación.</small></p></section></main>
-<footer>Vecinos por Guadarrama · Iniciativa de recopilación documental, sin garantía de resultado jurídico.</footer></body></html>
+input,select{width:100%;padding:13px;border:1px solid #aaa;border-radius:7px;font-size:16px;background:white;color:#222}
+input:focus{outline:2px solid var(--oro);outline-offset:2px}
+button{width:100%;padding:16px;border:0;border-radius:7px;background:var(--verde);color:white;font:bold 16px Arial,sans-serif;margin-top:22px;cursor:pointer}
+button:hover{background:#124429}button:disabled{opacity:.55;cursor:not-allowed}
+small,.muted{color:#555}footer{text-align:center;padding:20px;font-size:13px;color:#555}
+ol{padding-left:23px}li{margin:9px 0}.error{color:#9b2222;font:14px Arial,sans-serif}
+a{color:var(--verde)}.phase{font:700 12px Arial,sans-serif;color:var(--verde);letter-spacing:1px}
+@media print{header,main,footer{display:none}}
+</style></head><body>
+<header><small>VECINOS POR GUADARRAMA · TASAZO</small><h1>¿Presentaste tu recurso y aún no te han contestado?</h1><p>Prepara gratuitamente tu solicitud individual para que el Ayuntamiento dicte y notifique una resolución expresa.</p></header>
+<main>
+<section><div class="phase">FASE 2 · RECURSOS SIN RESPUESTA</div><h2>Genera tu escrito en unos minutos</h2>
+<p>Esta herramienta está pensada para quienes <strong>ya presentaron un recurso de reposición</strong> contra la tasa de residuos de Guadarrama y no han recibido resolución expresa.</p>
+<div class="note"><strong>Importante:</strong> este escrito no es un nuevo recurso contra la tasa. Solicita respuesta al recurso ya presentado. El silencio administrativo puede tener efectos jurídicos y esta solicitud <strong>no reinicia ni suspende automáticamente los plazos</strong> para acudir a los tribunales. Si estás valorando una demanda, consulta cuanto antes con un profesional.</div>
+<p><strong>Privacidad:</strong> los datos se utilizan únicamente en tu navegador para elaborar el PDF. Esta página no los envía ni los almacena. No adjuntes documentos ni los envíes por WhatsApp.</p>
+</section>
+<section><h2>Datos para tu escrito</h2>
+<form id="generador">
+<label for="nombre">Nombre y apellidos *</label><input id="nombre" name="nombre" required maxlength="120" autocomplete="name" placeholder="Nombre y apellidos">
+<label for="dni">DNI o NIE *</label><input id="dni" name="dni" required maxlength="20" autocomplete="off" placeholder="Documento de identidad">
+<label for="domicilio">Domicilio a efectos de notificaciones *</label><input id="domicilio" name="domicilio" required maxlength="220" autocomplete="street-address" placeholder="Calle, número, piso, localidad y código postal">
+<label for="fecha">Fecha de presentación del primer recurso *</label><input id="fecha" name="fecha" type="date" required>
+<label for="registro">Número de registro del recurso *</label><input id="registro" name="registro" required maxlength="90" placeholder="Número que figura en el justificante">
+<label for="expediente">Número de expediente (si lo conoces)</label><input id="expediente" name="expediente" maxlength="90" placeholder="Opcional">
+<label for="recibo">Referencia del recibo o liquidación (opcional)</label><input id="recibo" name="recibo" maxlength="110" placeholder="Opcional">
+<button type="submit">DESCARGAR MI ESCRITO EN PDF</button>
+<p id="mensaje" role="status" aria-live="polite" class="error"></p>
+</form>
+<div class="note"><strong>Antes de firmar:</strong> revisa que todos los datos sean correctos y que efectivamente no hayas recibido una resolución expresa.</div>
+</section>
+<section><h2>¿Qué hago con el PDF?</h2><ol><li>Descarga y revisa el documento.</li><li>Fírmalo y preséntalo en el registro electrónico del Ayuntamiento de Guadarrama o por otro registro legalmente admitido.</li><li>Conserva el justificante de presentación junto con el recurso original.</li></ol>
+<p>Esta herramienta no presenta el escrito por ti y no confirma que el Ayuntamiento lo haya recibido.</p></section>
+<section><div class="phase">FASE 3 · OPCIONAL</div><h2>¿Y si necesitamos acudir a un abogado?</h2><p>Más adelante, los vecinos que lo deseen podrán valorar la contratación compartida de un abogado especializado. Antes habrá que revisar los plazos de cada caso, estudiar la viabilidad y solicitar presupuestos claros. Participar será completamente voluntario.</p><p>Esta página no recoge inscripciones, dinero ni datos para esa futura iniciativa.</p></section>
+</main><footer>Vecinos por Guadarrama · Herramienta informativa y gratuita. No sustituye el asesoramiento jurídico individual.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js" referrerpolicy="no-referrer"></script>
+<script>
+(function(){
+'use strict';
+const form=document.getElementById('generador'),msg=document.getElementById('mensaje');
+const val=id=>document.getElementById(id).value.trim();
+function fechaES(iso){const p=iso.split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:iso}
+function normal(s){return s.normalize('NFKC').replace(/[\u0000-\u001f\u007f]/g,' ').replace(/\s+/g,' ').trim()}
+function writeLines(pdf,text,x,y,width,lineHeight){const lines=pdf.splitTextToSize(text,width);for(const line of lines){if(y>266){pdf.addPage();y=22}pdf.text(line,x,y);y+=lineHeight}return y}
+form.addEventListener('submit',function(e){
+e.preventDefault();msg.textContent='';
+if(!form.reportValidity())return;
+if(!window.jspdf||!window.jspdf.jsPDF){msg.textContent='No se ha podido cargar el generador de PDF. Comprueba tu conexión e inténtalo de nuevo.';return}
+const d={nombre:normal(val('nombre')),dni:normal(val('dni')),domicilio:normal(val('domicilio')),fecha:fechaES(val('fecha')),registro:normal(val('registro')),expediente:normal(val('expediente')),recibo:normal(val('recibo'))};
+if(new Date(val('fecha')+'T12:00:00')>new Date()){msg.textContent='La fecha del recurso no puede ser futura.';return}
+try{
+const pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
+pdf.setProperties({title:'Solicitud de resolucion expresa - recurso tasa residuos Guadarrama',subject:'Escrito individual de solicitud de resolucion expresa'});
+pdf.setFont('helvetica','bold');pdf.setFontSize(12);pdf.text('AL AYUNTAMIENTO DE GUADARRAMA',20,24);
+pdf.setFont('helvetica','normal');pdf.setFontSize(10.5);
+let y=38;const W=170;
+y=writeLines(pdf,'D./D.ª '+d.nombre+', con DNI/NIE '+d.dni+', con domicilio a efectos de notificaciones en '+d.domicilio+', comparece y, como mejor proceda en Derecho,',20,y,W,6);
+y+=5;pdf.setFont('helvetica','bold');y=writeLines(pdf,'EXPONE',20,y,W,6);pdf.setFont('helvetica','normal');y+=3;
+y=writeLines(pdf,'PRIMERO. Que el día '+d.fecha+' presentó recurso de reposición contra la tasa de residuos del Ayuntamiento de Guadarrama, con número de registro '+d.registro+'.'+(d.expediente?' Número de expediente: '+d.expediente+'.':'')+(d.recibo?' Referencia del recibo o liquidación: '+d.recibo+'.':''),20,y,W,6);y+=3;
+y=writeLines(pdf,'SEGUNDO. Que, a la fecha de presentación de este escrito, no ha recibido notificación de resolución expresa del recurso anteriormente identificado.',20,y,W,6);y+=3;
+y=writeLines(pdf,'TERCERO. Que el artículo 21 de la Ley 39/2015 establece la obligación de la Administración de dictar y notificar resolución expresa, y el artículo 14.2 del texto refundido de la Ley Reguladora de las Haciendas Locales regula la resolución de los recursos de reposición en materia tributaria local. La falta de resolución expresa no extingue dicha obligación.',20,y,W,6);y+=6;
+pdf.setFont('helvetica','bold');y=writeLines(pdf,'SOLICITA',20,y,W,6);pdf.setFont('helvetica','normal');y+=3;
+y=writeLines(pdf,'Que se dicte y notifique resolución expresa y motivada sobre el recurso de reposición identificado, con respuesta a las alegaciones formuladas, y que se practique la notificación por el cauce legalmente procedente.',20,y,W,6);y+=9;
+const hoy=new Date();const fechaHoy=String(hoy.getDate()).padStart(2,'0')+'/'+String(hoy.getMonth()+1).padStart(2,'0')+'/'+hoy.getFullYear();
+y=writeLines(pdf,'En Guadarrama, a '+fechaHoy+'.',20,y,W,6);y+=14;
+y=writeLines(pdf,'Firma: ___________________________________',20,y,W,6);
+pdf.save('solicitud-resolucion-expresa-tasazo.pdf');
+}catch(err){msg.textContent='No se ha podido crear el PDF. Vuelve a intentarlo.'}
+});
+})();
+</script></body></html>
