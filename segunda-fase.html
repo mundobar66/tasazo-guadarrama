@@ -47,44 +47,52 @@ a{color:var(--verde)}.phase{font:700 12px Arial,sans-serif;color:var(--verde);le
 <p><strong>Si no conoces el número de registro:</strong> se recomienda adjuntar una copia del recurso original, si la conservas, para facilitar su localización.</p><p>Esta herramienta no presenta el escrito por ti y no confirma que el Ayuntamiento lo haya recibido.</p></section>
 
 </main><footer>Vecinos por Guadarrama · Herramienta informativa y gratuita. No sustituye el asesoramiento jurídico individual.</footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js" referrerpolicy="no-referrer"></script>
 <script>
 (function(){
 'use strict';
 const form=document.getElementById('generador'),msg=document.getElementById('mensaje');
 const val=id=>document.getElementById(id).value.trim();
-function fechaES(iso){const p=iso.split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:iso}
-function normal(s){return s.normalize('NFKC').replace(/[\u0000-\u001f\u007f]/g,' ').replace(/\s+/g,' ').trim()}
-function writeLines(pdf,text,x,y,width,lineHeight){const lines=pdf.splitTextToSize(text,width);for(const line of lines){if(y>266){pdf.addPage();y=22}pdf.text(line,x,y);y+=lineHeight}return y}
+const clean=s=>s.normalize('NFKC').replace(/[\u0000-\u001f\u007f]/g,' ').replace(/\s+/g,' ').trim();
+const dateES=iso=>iso.split('-').reverse().join('/');
+function pdfWinAnsi(s){let out='';for(const c of s){const n=c.codePointAt(0);if(n<=255){out+=n.toString(16).padStart(2,'0')}else{out+='3f'}}return out.toUpperCase()}
+function makePdf(d){
+ const pages=[];let lines=[],y=795;const x=57,base=13;
+ function page(){if(lines.length)pages.push(lines.join('\n'));lines=[];y=795}
+ function line(t,bold=false,size=10.5){if(y<58)page();lines.push('BT /'+(bold?'F2':'F1')+' '+size+' Tf 1 0 0 1 '+x+' '+y.toFixed(1)+' Tm <'+pdfWinAnsi(t)+'> Tj ET');y-=base}
+ function paragraph(t,bold=false){const max=bold?86:93;let curr='';for(const w of t.split(/\s+/)){if((curr+' '+w).trim().length>max&&curr){line(curr,bold);curr=w}else curr=(curr+' '+w).trim()}if(curr)line(curr,bold);y-=7}
+ function heading(t){y-=5;paragraph(t,true)}
+ heading('AL AYUNTAMIENTO DE GUADARRAMA');y-=7;
+ paragraph('ASUNTO: SOLICITUD DE RESOLUCIÓN EXPRESA DE RECURSO DE REPOSICIÓN PENDIENTE - TASA DE RESIDUOS',true);
+ paragraph('D./D.ª '+d.nombre+', con DNI/NIE '+d.dni+', y domicilio a efectos de notificaciones en '+d.domicilio+', comparece ante este Ayuntamiento y, como mejor proceda en Derecho,');
+ heading('EXPONE');
+ paragraph('PRIMERO. Que con fecha '+d.fecha+' presentó recurso de reposición contra la tasa de residuos del Ayuntamiento de Guadarrama'+(d.registro?', con número de registro '+d.registro:'')+'.');
+ if(!d.registro&&d.anexo)paragraph('A efectos de facilitar su identificación y localización en los archivos municipales, se acompaña copia del recurso de reposición presentado.');
+ paragraph('SEGUNDO. Que, habiendo transcurrido el plazo legalmente establecido para su resolución, no ha recibido notificación de resolución expresa sobre dicho recurso.');
+ paragraph('TERCERO. Que el artículo 14.2.l) del Real Decreto Legislativo 2/2004, de 5 de marzo, establece, con las excepciones legalmente previstas, un plazo de un mes para resolver el recurso de reposición y dispone expresamente que la desestimación presunta no exime a la Administración de su obligación de resolver.');
+ paragraph('CUARTO. Que el artículo 21 de la Ley 39/2015, de 1 de octubre, establece la obligación de la Administración de dictar y notificar resolución expresa. Asimismo, el artículo 14.2.m) del Real Decreto Legislativo 2/2004 y el artículo 35.1.b) de la Ley 39/2015 exigen que la resolución del recurso sea motivada, con referencia a los hechos y fundamentos jurídicos correspondientes.');
+ paragraph('QUINTO. Que el artículo 53.1.a) de la Ley 39/2015 reconoce a los interesados el derecho a conocer el estado de tramitación de sus procedimientos y el órgano competente para resolverlos.');
+ heading('SOLICITA');
+ paragraph('1. Que el Ayuntamiento dicte y notifique resolución expresa y motivada sobre el recurso de reposición anteriormente identificado, dando respuesta a las alegaciones formuladas y expresando las razones jurídicas de su decisión.');
+ paragraph('2. Que se informe del estado actual de tramitación del recurso y del órgano municipal competente para resolverlo.');
+ paragraph('3. Que la resolución se notifique conforme a lo dispuesto en el artículo 40.2 de la Ley 39/2015, incluyendo el texto íntegro de la resolución, la indicación de si pone fin o no a la vía administrativa y los recursos que procedan, con expresión del órgano ante el que deban interponerse y los plazos correspondientes.');
+ const today=new Date();paragraph('En Guadarrama, a '+String(today.getDate()).padStart(2,'0')+'/'+String(today.getMonth()+1).padStart(2,'0')+'/'+today.getFullYear()+'.');y-=13;
+ paragraph('Firma: ___________________________________');
+ if(!d.registro&&d.anexo)paragraph('ANEXO I. Copia del recurso de reposición presentado (a adjuntar por la persona interesada).');
+ page();
+ const objects=[null,'<< /Type /Catalog /Pages 2 0 R >>',null,'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>'];
+ const kids=[];for(const content of pages){const p=objects.length,k=p+1;kids.push(p+' 0 R');objects.push('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents '+k+' 0 R >>');objects.push('<< /Length '+content.length+' >>\nstream\n'+content+'\nendstream')}
+ objects[2]='<< /Type /Pages /Kids ['+kids.join(' ')+'] /Count '+kids.length+' >>';
+ let pdf='%PDF-1.4\n%ASCII\n',offsets=[0];for(let i=1;i<objects.length;i++){offsets.push(pdf.length);pdf+=i+' 0 obj\n'+objects[i]+'\nendobj\n'}
+ const xref=pdf.length;pdf+='xref\n0 '+objects.length+'\n0000000000 65535 f \n';for(let i=1;i<offsets.length;i++)pdf+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
+ pdf+='trailer\n<< /Size '+objects.length+' /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF';
+ return new Blob([pdf],{type:'application/pdf'});
+}
 form.addEventListener('submit',function(e){
-e.preventDefault();msg.textContent='';
-if(!form.reportValidity())return;
-if(!window.jspdf||!window.jspdf.jsPDF){msg.textContent='No se ha podido cargar el generador de PDF. Comprueba tu conexión e inténtalo de nuevo.';return}
-const d={nombre:normal(val('nombre')),dni:normal(val('dni')),domicilio:normal(val('domicilio')),fecha:fechaES(val('fecha')),registro:normal(val('registro')),anexo:val('anexo')==='si'};
-if(new Date(val('fecha')+'T12:00:00')>new Date()){msg.textContent='La fecha del recurso no puede ser futura.';return}
-try{
-const pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
-pdf.setProperties({title:'Solicitud de resolucion expresa - recurso tasa residuos Guadarrama',subject:'Escrito individual de solicitud de resolucion expresa'});
-pdf.setFont('helvetica','bold');pdf.setFontSize(12);pdf.text('AL AYUNTAMIENTO DE GUADARRAMA',20,24);
-pdf.setFont('helvetica','normal');pdf.setFontSize(10.5);
-let y=38;const W=170;
-y=writeLines(pdf,'D./D.ª '+d.nombre+', con DNI/NIE '+d.dni+', con domicilio a efectos de notificaciones en '+d.domicilio+', comparece y, como mejor proceda en Derecho,',20,y,W,6);
-y+=5;pdf.setFont('helvetica','bold');y=writeLines(pdf,'EXPONE',20,y,W,6);pdf.setFont('helvetica','normal');y+=3;
-y=writeLines(pdf,'PRIMERO. Que con fecha '+d.fecha+' presentó recurso de reposición contra la tasa de residuos del Ayuntamiento de Guadarrama'+(d.registro?', con número de registro '+d.registro:'')+'.',20,y,W,6);y+=3;
-if(!d.registro&&d.anexo){y=writeLines(pdf,'A efectos de facilitar su identificación y localización en los archivos municipales, se acompaña copia del recurso de reposición presentado.',20,y,W,6);y+=3}
-y=writeLines(pdf,'SEGUNDO. Que, habiendo transcurrido el plazo legalmente establecido para su resolución, no ha recibido notificación de resolución expresa sobre dicho recurso.',20,y,W,6);y+=3;
-y=writeLines(pdf,'TERCERO. Que el artículo 14.2.l) del Real Decreto Legislativo 2/2004, de 5 de marzo, establece, con las excepciones legalmente previstas, un plazo de un mes para resolver el recurso de reposición y dispone expresamente que la desestimación presunta no exime a la Administración de su obligación de resolver.',20,y,W,6);y+=3;
-y=writeLines(pdf,'CUARTO. Que el artículo 21 de la Ley 39/2015, de 1 de octubre, establece la obligación de la Administración de dictar y notificar resolución expresa. Asimismo, el artículo 14.2.m) del Real Decreto Legislativo 2/2004 y el artículo 35.1.b) de la Ley 39/2015 exigen que la resolución del recurso sea motivada, con referencia a los hechos y fundamentos jurídicos correspondientes.',20,y,W,6);y+=3;
-y=writeLines(pdf,'QUINTO. Que el artículo 53.1.a) de la Ley 39/2015 reconoce a los interesados el derecho a conocer el estado de tramitación de sus procedimientos y el órgano competente para resolverlos.',20,y,W,6);y+=5;
-pdf.setFont('helvetica','bold');y=writeLines(pdf,'SOLICITA',20,y,W,6);pdf.setFont('helvetica','normal');y+=3;
-y=writeLines(pdf,'1. Que el Ayuntamiento dicte y notifique resolución expresa y motivada sobre el recurso de reposición anteriormente identificado, dando respuesta a las alegaciones formuladas y expresando las razones jurídicas de su decisión.',20,y,W,6);y+=3;
-y=writeLines(pdf,'2. Que se informe del estado actual de tramitación del recurso y del órgano municipal competente para resolverlo.',20,y,W,6);y+=3;
-y=writeLines(pdf,'3. Que la resolución se notifique conforme a lo dispuesto en el artículo 40.2 de la Ley 39/2015, incluyendo el texto íntegro de la resolución, la indicación de si pone fin o no a la vía administrativa y los recursos que procedan, con expresión del órgano ante el que deban interponerse y los plazos correspondientes.',20,y,W,6);y+=9;
-const hoy=new Date();const fechaHoy=String(hoy.getDate()).padStart(2,'0')+'/'+String(hoy.getMonth()+1).padStart(2,'0')+'/'+hoy.getFullYear();
-y=writeLines(pdf,'En Guadarrama, a '+fechaHoy+'.',20,y,W,6);y+=14;
-y=writeLines(pdf,'Firma: ___________________________________',20,y,W,6);if(!d.registro&&d.anexo){y+=7;y=writeLines(pdf,'ANEXO I. Copia del recurso de reposición presentado (a adjuntar por la persona interesada).',20,y,W,6)}
-pdf.save('solicitud-resolucion-expresa-tasazo.pdf');
-}catch(err){msg.textContent='No se ha podido crear el PDF. Vuelve a intentarlo.'}
+ e.preventDefault();msg.textContent='';if(!form.reportValidity())return;
+ const iso=val('fecha');if(new Date(iso+'T12:00:00')>new Date()){msg.textContent='La fecha del recurso no puede ser futura.';return}
+ const d={nombre:clean(val('nombre')),dni:clean(val('dni')),domicilio:clean(val('domicilio')),fecha:dateES(iso),registro:clean(val('registro')),anexo:val('anexo')==='si'};
+ try{const blob=makePdf(d),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='solicitud-resolucion-expresa-tasazo.pdf';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);msg.style.color='#1a5c38';msg.textContent='Documento generado. Si no aparece la descarga, revisa las descargas de tu navegador.'}
+ catch(err){msg.style.color='#9b2222';msg.textContent='No se ha podido generar el PDF. Inténtalo de nuevo.'}
 });
 })();
 </script></body></html>
