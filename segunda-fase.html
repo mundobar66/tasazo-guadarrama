@@ -36,16 +36,15 @@ a{color:var(--verde)}.phase{font:700 12px Arial,sans-serif;color:var(--verde);le
 <label for="dni">DNI o NIE *</label><input id="dni" name="dni" required maxlength="20" autocomplete="off" placeholder="Documento de identidad">
 <label for="domicilio">Domicilio a efectos de notificaciones *</label><input id="domicilio" name="domicilio" required maxlength="220" autocomplete="street-address" placeholder="Calle, número, piso, localidad y código postal">
 <label for="fecha">Fecha de presentación del primer recurso *</label><input id="fecha" name="fecha" type="date" required>
-<label for="registro">Número de registro del recurso *</label><input id="registro" name="registro" required maxlength="90" placeholder="Número que figura en el justificante">
-<label for="expediente">Número de expediente (si lo conoces)</label><input id="expediente" name="expediente" maxlength="90" placeholder="Opcional">
-<label for="recibo">Referencia del recibo o liquidación (opcional)</label><input id="recibo" name="recibo" maxlength="110" placeholder="Opcional">
+<label for="registro">Número de registro del recurso (opcional)</label><input id="registro" name="registro" maxlength="90" placeholder="Déjalo vacío si no lo conoces">
+<label for="anexo">Si no tienes número de registro, ¿adjuntarás una copia del recurso original?</label><select id="anexo" name="anexo"><option value="no">No / No dispongo de copia</option><option value="si">Sí, adjuntaré una copia al presentarlo</option></select><p class="muted" style="font-size:14px;margin-top:8px">No es obligatorio. Si eliges «Sí», recuerda adjuntar tú mismo la copia en la sede electrónica o en el registro presencial.</p>
 <button type="submit">DESCARGAR MI ESCRITO EN PDF</button>
 <p id="mensaje" role="status" aria-live="polite" class="error"></p>
 </form>
 <div class="note"><strong>Antes de firmar:</strong> revisa que todos los datos sean correctos y que efectivamente no hayas recibido una resolución expresa.</div>
 </section>
 <section><h2>¿Cómo presento el escrito?</h2><p>Descarga el PDF, comprueba los datos y elige una de estas dos vías:</p><ol><li><strong>Por internet:</strong> entra en la <a href="https://ayuntamientodeguadarrama.sedelectronica.es/info.0" target="_blank" rel="noopener noreferrer">Oficina Virtual / Sede Electrónica del Ayuntamiento de Guadarrama</a>, identifícate mediante un sistema admitido y presenta el PDF a través del trámite de registro correspondiente. Guarda el justificante electrónico.</li><li><strong>Presencialmente:</strong> imprime y firma el escrito y preséntalo en el <strong>Registro General del Ayuntamiento, Plaza Mayor, 5, Guadarrama</strong>. Horario publicado: de lunes a viernes, de 9:00 a 14:00. Solicita y conserva una copia sellada o justificante de registro.</li></ol><p>Conserva el justificante junto con tu recurso original.</p>
-<p>Esta herramienta no presenta el escrito por ti y no confirma que el Ayuntamiento lo haya recibido.</p></section>
+<p><strong>Si no conoces el número de registro:</strong> se recomienda adjuntar una copia del recurso original, si la conservas, para facilitar su localización.</p><p>Esta herramienta no presenta el escrito por ti y no confirma que el Ayuntamiento lo haya recibido.</p></section>
 
 </main><footer>Vecinos por Guadarrama · Herramienta informativa y gratuita. No sustituye el asesoramiento jurídico individual.</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js" referrerpolicy="no-referrer"></script>
@@ -61,7 +60,7 @@ form.addEventListener('submit',function(e){
 e.preventDefault();msg.textContent='';
 if(!form.reportValidity())return;
 if(!window.jspdf||!window.jspdf.jsPDF){msg.textContent='No se ha podido cargar el generador de PDF. Comprueba tu conexión e inténtalo de nuevo.';return}
-const d={nombre:normal(val('nombre')),dni:normal(val('dni')),domicilio:normal(val('domicilio')),fecha:fechaES(val('fecha')),registro:normal(val('registro')),expediente:normal(val('expediente')),recibo:normal(val('recibo'))};
+const d={nombre:normal(val('nombre')),dni:normal(val('dni')),domicilio:normal(val('domicilio')),fecha:fechaES(val('fecha')),registro:normal(val('registro')),anexo:val('anexo')==='si'};
 if(new Date(val('fecha')+'T12:00:00')>new Date()){msg.textContent='La fecha del recurso no puede ser futura.';return}
 try{
 const pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
@@ -71,14 +70,19 @@ pdf.setFont('helvetica','normal');pdf.setFontSize(10.5);
 let y=38;const W=170;
 y=writeLines(pdf,'D./D.ª '+d.nombre+', con DNI/NIE '+d.dni+', con domicilio a efectos de notificaciones en '+d.domicilio+', comparece y, como mejor proceda en Derecho,',20,y,W,6);
 y+=5;pdf.setFont('helvetica','bold');y=writeLines(pdf,'EXPONE',20,y,W,6);pdf.setFont('helvetica','normal');y+=3;
-y=writeLines(pdf,'PRIMERO. Que el día '+d.fecha+' presentó recurso de reposición contra la tasa de residuos del Ayuntamiento de Guadarrama, con número de registro '+d.registro+'.'+(d.expediente?' Número de expediente: '+d.expediente+'.':'')+(d.recibo?' Referencia del recibo o liquidación: '+d.recibo+'.':''),20,y,W,6);y+=3;
-y=writeLines(pdf,'SEGUNDO. Que, a la fecha de presentación de este escrito, no ha recibido notificación de resolución expresa del recurso anteriormente identificado.',20,y,W,6);y+=3;
-y=writeLines(pdf,'TERCERO. Que el artículo 21 de la Ley 39/2015 establece la obligación de la Administración de dictar y notificar resolución expresa, y el artículo 14.2 del texto refundido de la Ley Reguladora de las Haciendas Locales regula la resolución de los recursos de reposición en materia tributaria local. La falta de resolución expresa no extingue dicha obligación.',20,y,W,6);y+=6;
+y=writeLines(pdf,'PRIMERO. Que con fecha '+d.fecha+' presentó recurso de reposición contra la tasa de residuos del Ayuntamiento de Guadarrama'+(d.registro?', con número de registro '+d.registro:'')+'.',20,y,W,6);y+=3;
+if(!d.registro&&d.anexo){y=writeLines(pdf,'A efectos de facilitar su identificación y localización en los archivos municipales, se acompaña copia del recurso de reposición presentado.',20,y,W,6);y+=3}
+y=writeLines(pdf,'SEGUNDO. Que, habiendo transcurrido el plazo legalmente establecido para su resolución, no ha recibido notificación de resolución expresa sobre dicho recurso.',20,y,W,6);y+=3;
+y=writeLines(pdf,'TERCERO. Que el artículo 14.2.l) del Real Decreto Legislativo 2/2004, de 5 de marzo, establece, con las excepciones legalmente previstas, un plazo de un mes para resolver el recurso de reposición y dispone expresamente que la desestimación presunta no exime a la Administración de su obligación de resolver.',20,y,W,6);y+=3;
+y=writeLines(pdf,'CUARTO. Que el artículo 21 de la Ley 39/2015, de 1 de octubre, establece la obligación de la Administración de dictar y notificar resolución expresa. Asimismo, el artículo 14.2.m) del Real Decreto Legislativo 2/2004 y el artículo 35.1.b) de la Ley 39/2015 exigen que la resolución del recurso sea motivada, con referencia a los hechos y fundamentos jurídicos correspondientes.',20,y,W,6);y+=3;
+y=writeLines(pdf,'QUINTO. Que el artículo 53.1.a) de la Ley 39/2015 reconoce a los interesados el derecho a conocer el estado de tramitación de sus procedimientos y el órgano competente para resolverlos.',20,y,W,6);y+=5;
 pdf.setFont('helvetica','bold');y=writeLines(pdf,'SOLICITA',20,y,W,6);pdf.setFont('helvetica','normal');y+=3;
-y=writeLines(pdf,'Que se dicte y notifique resolución expresa y motivada sobre el recurso de reposición identificado, con respuesta a las alegaciones formuladas, y que se practique la notificación por el cauce legalmente procedente.',20,y,W,6);y+=9;
+y=writeLines(pdf,'1. Que el Ayuntamiento dicte y notifique resolución expresa y motivada sobre el recurso de reposición anteriormente identificado, dando respuesta a las alegaciones formuladas y expresando las razones jurídicas de su decisión.',20,y,W,6);y+=3;
+y=writeLines(pdf,'2. Que se informe del estado actual de tramitación del recurso y del órgano municipal competente para resolverlo.',20,y,W,6);y+=3;
+y=writeLines(pdf,'3. Que la resolución se notifique conforme a lo dispuesto en el artículo 40.2 de la Ley 39/2015, incluyendo el texto íntegro de la resolución, la indicación de si pone fin o no a la vía administrativa y los recursos que procedan, con expresión del órgano ante el que deban interponerse y los plazos correspondientes.',20,y,W,6);y+=9;
 const hoy=new Date();const fechaHoy=String(hoy.getDate()).padStart(2,'0')+'/'+String(hoy.getMonth()+1).padStart(2,'0')+'/'+hoy.getFullYear();
 y=writeLines(pdf,'En Guadarrama, a '+fechaHoy+'.',20,y,W,6);y+=14;
-y=writeLines(pdf,'Firma: ___________________________________',20,y,W,6);
+y=writeLines(pdf,'Firma: ___________________________________',20,y,W,6);if(!d.registro&&d.anexo){y+=7;y=writeLines(pdf,'ANEXO I. Copia del recurso de reposición presentado (a adjuntar por la persona interesada).',20,y,W,6)}
 pdf.save('solicitud-resolucion-expresa-tasazo.pdf');
 }catch(err){msg.textContent='No se ha podido crear el PDF. Vuelve a intentarlo.'}
 });
